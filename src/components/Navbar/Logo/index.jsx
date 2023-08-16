@@ -1,11 +1,11 @@
 import LogoImg from "../../../assets/TanitaBeer.png";
-import LogoImg1 from "../../../assets/T.png";
+import { Link } from "react-router-dom";
 
 function Logo() {
   return (
-    <div className="w-60">
+    <Link to="/" className="w-60">
       <img className="w-full" src={LogoImg} alt="" />
-    </div>
+    </Link>
   );
 }
 export default Logo;
