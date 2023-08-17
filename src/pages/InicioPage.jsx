@@ -5,7 +5,7 @@ function InicioPage() {
   return (
     <section>
       <MainLogo />
-      <ItemListContainer isTitle="Productos Destacados" />
+      <ItemListContainer />
     </section>
   );
 }

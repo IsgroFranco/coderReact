@@ -1,5 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import CartWidget from "./CartWidget";
 import SearchBar from "./SearchBar";
@@ -12,6 +12,11 @@ function Navbar() {
   const [iconRotate, setIconRotate] = useState(false);
 
   const location = useLocation();
+
+  useEffect(() => {
+    setDropDown(false);
+    setIconRotate(false);
+  }, [location.pathname]);
 
   const toggleDropDown = () => {
     setDropDown(!dropDown);
@@ -41,7 +46,7 @@ function Navbar() {
               <button
                 onClick={toggleDropDown}
                 className={`cursor-pointer ${
-                  location.pathname === "/" ? "" : "disabled"
+                  location.pathname === "/nosotros" ? "disabled" : ""
                 }`}
               >
                 TIPOS{" "}
@@ -56,10 +61,14 @@ function Navbar() {
               <ul
                 className={`dropdown-menu bg-white absolute flex flex-col gap-1 ${
                   dropDown ? "open" : ""
-                } ${location.pathname === "/" ? "" : "disabledDrop"} `}
+                } ${location.pathname === "/nosotros" ? "disabled" : ""} `}
               >
-                <Link className="mt-2">IPA</Link>
-                <Link className="mb-2">LAGER</Link>
+                <Link to="productos/ipa" className="mt-2">
+                  IPA
+                </Link>
+                <Link to="productos/lager" className="mb-2">
+                  LAGER
+                </Link>
               </ul>
             </li>
           </ul>

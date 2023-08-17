@@ -1,8 +1,13 @@
 import Item from "./Item";
 
-function Items({ productos }) {
+function Items({ productos, isProductRoute }) {
   return productos.map((data) => (
-    <Item key={data.id} data={data} buttonText="Ver Detalles" />
+    <Item
+      key={data.id}
+      data={data}
+      buttonText="Ver Detalles"
+      isProductRoute={isProductRoute}
+    />
   ));
 }
 
