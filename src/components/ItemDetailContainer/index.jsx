@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 // COMPONENTS
 
-import ItemDetail from "../ItemDetail/index.jsx.jsx";
+import ItemDetail from "./ItemDetail/index.jsx";
 
 function ItemDetailContainer() {
   const [item, setItem] = useState(null);

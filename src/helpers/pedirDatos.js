@@ -4,7 +4,7 @@ export const pedirDatos = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(products);
-    }, 500);
+    }, 1000);
   });
 };
 

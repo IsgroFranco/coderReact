@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 function Item({ data, isProductRoute }) {
   return (
-    <div className="flex p-5 group">
-      <div className="w-52 relative ">
+    <div className="flex group">
+      <div className="flex flex-col w-52 relative ">
         <img className="w-full" src={data.image} alt={data.name} />
         <div
           className={`absolute ${
