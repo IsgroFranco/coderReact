@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { pedirDatos } from "../../helpers/pedirDatos";
 import { useLocation, useParams } from "react-router-dom";
 import { toUpperFirstLetter } from "../../helpers/toUpperFirstLetter";
+import { CartContex } from "../../context/CartContext";
 
 // COMPONENTS
 
@@ -10,15 +11,28 @@ import Items from "./Items";
 function ItemListContainer({ isProductRoute }) {
   const [productos, setProductos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
   const [titulo, setTitulo] = useState("Todos los productos");
+  const { searchInput } = useContext(CartContex);
 
   const tipo = useParams().tipo;
   const location = useLocation();
 
   useEffect(() => {
-    setIsLoading(true);
+    if (location.pathname !== "/" || isStarted === false) setIsLoading(true);
     pedirDatos().then((response) => {
-      if (tipo) {
+      if (location.pathname === "/productos" && searchInput) {
+        const filtradoProductos = response.filter((producto) =>
+          producto.name.toLowerCase().includes(searchInput.toLowerCase())
+        );
+        setProductos(filtradoProductos);
+        if (filtradoProductos.length === 0) {
+          setTitulo("No hay ningun producto con ese nombre");
+        } else {
+          setTitulo(`Resultados para "${searchInput}"`);
+        }
+        setIsLoading(false);
+      } else if (tipo) {
         const filtradoProductos = response.filter(
           (producto) => producto.tipo.toLowerCase() === tipo
         );
@@ -26,15 +40,17 @@ function ItemListContainer({ isProductRoute }) {
         setTitulo(`Cervezas ${toUpperFirstLetter(tipo)}`);
         setIsLoading(false);
       } else if (location.pathname === "/") {
+        setIsStarted(true);
         setProductos(response);
         setTitulo("Algunos productos");
         setIsLoading(false);
       } else {
         setProductos(response);
+        setTitulo("Todos los productos");
         setIsLoading(false);
       }
     });
-  }, [tipo]);
+  }, [tipo, searchInput]);
 
   return (
     <article className="flex justify-center flex-wrap">

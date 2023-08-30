@@ -4,6 +4,7 @@ import ProductosPages from "../pages/ProductosPage";
 import NosotrosPage from "../pages/NosotrosPage";
 import DetallePage from "../pages/DetallePage";
 import ItemListContainer from "../components/ItemListContainer";
+import CarritoPage from "../pages/CarritoPage";
 
 function RoutesConfig() {
   return (
@@ -15,6 +16,7 @@ function RoutesConfig() {
       <Route path="/detalles/:id" element={<DetallePage />} />
       <Route path="/productos/detalles/:id" element={<DetallePage />} />
       <Route path="/productos/:tipo/detalles/:id" element={<DetallePage />} />
+      <Route path="/carrito" element={<CarritoPage />} />
     </Routes>
   );
 }

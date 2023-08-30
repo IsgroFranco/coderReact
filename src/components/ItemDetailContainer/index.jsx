@@ -9,7 +9,6 @@ import ItemDetail from "./ItemDetail/index.jsx";
 function ItemDetailContainer() {
   const [item, setItem] = useState(null);
   let { id } = useParams();
-  console.log(item);
 
   useEffect(() => {
     pedirItemPorId(id).then((response) => setItem(response));

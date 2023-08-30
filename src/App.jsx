@@ -5,15 +5,18 @@ import RoutesConfig from "./routes/RoutesConfig";
 
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar";
+import { CartProvider } from "./context/CartContext";
 
 function App() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Router>
-        <Navbar />
-        <RoutesConfig />
-        <Footer />
-      </Router>
+      <CartProvider>
+        <Router>
+          <Navbar />
+          <RoutesConfig />
+          <Footer />
+        </Router>
+      </CartProvider>
     </div>
   );
 }

@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { CartContex } from "../../../context/CartContext";
 
 function ItemDetail({ item }) {
+  const { agregarAlCarrito } = useContext(CartContex);
   const [cantidad, setCantidad] = useState(1);
 
   const handleSumar = () => {
     setCantidad(cantidad + 1);
   };
-
   const handleRestar = () => {
     cantidad > 1 && setCantidad(cantidad - 1);
   };
@@ -48,7 +49,12 @@ function ItemDetail({ item }) {
         <p className="font-medium text-gray-800 text-2xl mt-4">
           Precio: ${item.price.toFixed(2)}
         </p>
-        <button className="mt-6 px-6 py-3 border border-black font-medium text-lg text-black rounded">
+        <button
+          className="mt-6 px-6 py-3 border border-black font-medium text-lg text-black rounded"
+          onClick={() => {
+            agregarAlCarrito(item, cantidad);
+          }}
+        >
           Agregar al Carrito
         </button>
       </div>

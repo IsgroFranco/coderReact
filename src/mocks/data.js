@@ -11,7 +11,6 @@ export const products = [
     marca: "Kungstman",
     tipo: "Ipa",
     image: CervezaIpaKungstman,
-    quantity: "",
     price: 500,
   },
   {
@@ -20,7 +19,6 @@ export const products = [
     marca: "Imeprial",
     tipo: "Ipa",
     image: CervezaIpaImperial,
-    quantity: "",
     price: 700,
   },
   {
@@ -29,7 +27,6 @@ export const products = [
     marca: "Amstel",
     tipo: "Lager",
     image: CervezaLagerAmstel,
-    quantity: "",
     price: 900,
   },
   {
@@ -38,7 +35,6 @@ export const products = [
     marca: "Salta",
     tipo: "Lager",
     image: CervezaLagerSalta,
-    quantity: "",
     price: 650,
   },
   {
@@ -47,7 +43,6 @@ export const products = [
     marca: "Miller",
     tipo: "Lager",
     image: CervezaLagerMiller,
-    quantity: "",
     price: 780,
   },
 ];
