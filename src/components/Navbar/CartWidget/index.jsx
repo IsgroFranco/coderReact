@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import Cart from "../../../assets/CartWidget.svg";
 import { useContext } from "react";
-import { CartContex } from "../../../context/CartContext";
+import { CartContext } from "../../../context/CartContext";
 
 function CartWidget() {
-  const { cantidadEnCarrito } = useContext(CartContex);
+  const { cantidadEnCarrito } = useContext(CartContext);
 
   return (
     <div className="flex justify-end p-2 mr-5">

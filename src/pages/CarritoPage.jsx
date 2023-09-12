@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from "react";
-import { CartContex } from "../context/CartContext";
+import React, { useContext } from "react";
+import { CartContext } from "../context/CartContext";
+import { Link } from "react-router-dom";
 
 function CarritoPage() {
-  const { carrito, vaciarCarrito } = useContext(CartContex);
+  const { carrito, vaciarCarrito, precioTotal } = useContext(CartContext);
 
   return (
     <div className="max-w-3xl mx-auto p-4">
@@ -38,6 +39,11 @@ function CarritoPage() {
                 </div>
               </li>
             ))}
+            <div className="flex flex-col justify-center">
+              <p className="font-bold text-xl mt-3 mb-1">
+                Precio Total: ${precioTotal()}
+              </p>
+            </div>
           </ul>
         )}
       </div>
@@ -50,9 +56,12 @@ function CarritoPage() {
             >
               Vaciar Carrito
             </button>
-            <button className="bg-green-500 text-white px-4 py-2 rounded">
-              Comprar
-            </button>
+            <Link
+              to="/checkout"
+              className="bg-green-500 text-white px-4 py-2 rounded"
+            >
+              Finalizar compra
+            </Link>
           </div>
         </div>
       )}

@@ -1,4 +1,9 @@
-import { products } from "../mocks/data";
+export const getBeers = async () => {
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    console.log(doc.id, " => ", doc.data());
+  });
+};
 
 export const pedirDatos = () => {
   return new Promise((resolve, reject) => {

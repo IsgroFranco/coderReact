@@ -1,8 +1,9 @@
 import { useEffect, useState, useContext } from "react";
-import { pedirDatos } from "../../helpers/pedirDatos";
 import { useLocation, useParams } from "react-router-dom";
 import { toUpperFirstLetter } from "../../helpers/toUpperFirstLetter";
-import { CartContex } from "../../context/CartContext";
+import { CartContext } from "../../context/CartContext";
+import { db } from "../../firebase/firebaseConfig";
+import { collection, query, getDocs, where } from "firebase/firestore";
 
 // COMPONENTS
 
@@ -13,44 +14,52 @@ function ItemListContainer({ isProductRoute }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isStarted, setIsStarted] = useState(false);
   const [titulo, setTitulo] = useState("Todos los productos");
-  const { searchInput } = useContext(CartContex);
+  const { searchInput } = useContext(CartContext);
 
-  const tipo = useParams().tipo;
+  const category = useParams().category;
   const location = useLocation();
 
   useEffect(() => {
+    const beersRef = collection(db, "beers");
+    const q = category
+      ? query(beersRef, where("tipo", "==", category))
+      : beersRef;
+
     if (location.pathname !== "/" || isStarted === false) setIsLoading(true);
-    pedirDatos().then((response) => {
+
+    getDocs(q).then((resp) => {
+      const responseData = resp.docs.map((doc) => {
+        return { ...doc.data(), id: doc.id };
+      });
       if (location.pathname === "/productos" && searchInput) {
-        const filtradoProductos = response.filter((producto) =>
+        const filtradoProductos = responseData.filter((producto) =>
           producto.name.toLowerCase().includes(searchInput.toLowerCase())
         );
         setProductos(filtradoProductos);
+
         if (filtradoProductos.length === 0) {
           setTitulo("No hay ningun producto con ese nombre");
         } else {
           setTitulo(`Resultados para "${searchInput}"`);
+          setProductos(filtradoProductos);
         }
         setIsLoading(false);
-      } else if (tipo) {
-        const filtradoProductos = response.filter(
-          (producto) => producto.tipo.toLowerCase() === tipo
-        );
-        setProductos(filtradoProductos);
-        setTitulo(`Cervezas ${toUpperFirstLetter(tipo)}`);
+      } else if (category) {
+        setProductos(responseData);
+        setTitulo(`Cervezas ${toUpperFirstLetter(category)}`);
         setIsLoading(false);
       } else if (location.pathname === "/") {
         setIsStarted(true);
-        setProductos(response);
+        setProductos(responseData);
         setTitulo("Algunos productos");
         setIsLoading(false);
       } else {
-        setProductos(response);
+        setProductos(responseData);
         setTitulo("Todos los productos");
         setIsLoading(false);
       }
     });
-  }, [tipo, searchInput]);
+  }, [category, searchInput]);
 
   return (
     <article className="flex justify-center flex-wrap">

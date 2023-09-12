@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import SearchImg from "../../../assets/search.svg";
-import { CartContex } from "../../../context/CartContext";
+import { CartContext } from "../../../context/CartContext";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function SearchBar() {
-  const { searchInput, handleChange } = useContext(CartContex);
+  const { searchInput, handleChange } = useContext(CartContext);
   const navigate = useNavigate();
   const location = useLocation();
 

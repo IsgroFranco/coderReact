@@ -1,15 +1,24 @@
 import { useContext, useState } from "react";
-import { CartContex } from "../../../context/CartContext";
+import { CartContext } from "../../../context/CartContext";
 
-function ItemDetail({ item }) {
-  const { agregarAlCarrito } = useContext(CartContex);
-  const [cantidad, setCantidad] = useState(1);
+function ItemDetail({ item, stock, setStock }) {
+  const { agregarAlCarrito } = useContext(CartContext);
+  const [cantidad, setCantidad] = useState(0);
 
   const handleSumar = () => {
-    setCantidad(cantidad + 1);
+    cantidad < stock ? setCantidad(cantidad + 1) : null;
   };
+
   const handleRestar = () => {
     cantidad > 1 && setCantidad(cantidad - 1);
+  };
+
+  const handleAgregar = () => {
+    agregarAlCarrito(item, cantidad);
+    const nuevoStock = stock > 0 ? stock - cantidad : stock;
+    setStock(nuevoStock);
+    setCantidad(0);
+    localStorage.setItem(`stock_${item.id}`, nuevoStock.toString());
   };
 
   return (
@@ -29,6 +38,9 @@ function ItemDetail({ item }) {
           </p>
           <p className="text-gray-700 text-lg font-medium mb-1">
             Tipo: {item.tipo}
+          </p>
+          <p className="text-gray-700 text-lg font-medium mb-1">
+            Stock: {stock}
           </p>
         </div>
         <div className="flex items-center mt-4">
@@ -51,9 +63,7 @@ function ItemDetail({ item }) {
         </p>
         <button
           className="mt-6 px-6 py-3 border border-black font-medium text-lg text-black rounded"
-          onClick={() => {
-            agregarAlCarrito(item, cantidad);
-          }}
+          onClick={handleAgregar}
         >
           Agregar al Carrito
         </button>

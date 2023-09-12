@@ -7,7 +7,7 @@ import CervezaLagerMiller from "../assets/CervezaLagerMiller.webp";
 export const products = [
   {
     id: "ipa-kungstman",
-    name: " Cerveza Kungstman Ipa ",
+    name: "Cerveza Kungstman Ipa",
     marca: "Kungstman",
     tipo: "Ipa",
     image: CervezaIpaKungstman,
