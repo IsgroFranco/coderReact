@@ -45,6 +45,7 @@ function ItemListContainer({ isProductRoute }) {
         }
         setIsLoading(false);
       } else if (category) {
+        setIsStarted(true);
         setProductos(responseData);
         setTitulo(`Cervezas ${toUpperFirstLetter(category)}`);
         setIsLoading(false);

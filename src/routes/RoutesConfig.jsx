@@ -16,7 +16,10 @@ function RoutesConfig() {
       <Route path="/nosotros" element={<NosotrosPage />} />
       <Route path="/detalles/:id" element={<DetallePage />} />
       <Route path="/productos/detalles/:id" element={<DetallePage />} />
-      <Route path="/productos/:tipo/detalles/:id" element={<DetallePage />} />
+      <Route
+        path="/productos/:category/detalles/:id"
+        element={<DetallePage />}
+      />
       <Route path="/carrito" element={<CarritoPage />} />
       <Route path="/checkout" element={<Checkout />} />
     </Routes>

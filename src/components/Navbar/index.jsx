@@ -1,6 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { pedirDatos } from "../../helpers/pedirDatos";
 
 import CartWidget from "./CartWidget";
 import SearchBar from "./SearchBar";

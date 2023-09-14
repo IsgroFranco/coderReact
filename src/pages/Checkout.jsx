@@ -66,6 +66,22 @@ function Checkout() {
               required
             />
           </div>
+
+          <div className="mb-4">
+            <label
+              htmlFor="text"
+              className="block text-gray-700 font-medium mb-2"
+            >
+              Apellido
+            </label>
+            <input
+              type="text"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              {...register("apellido")}
+              required
+            />
+          </div>
+
           <div className="mb-4">
             <label
               htmlFor="email"
